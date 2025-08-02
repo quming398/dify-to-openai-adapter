@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  dify-openai-adapter:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Dify 配置 - 请在部署时设置实际值
+      - DIFY_BASE_URL=${DIFY_BASE_URL:-http://localhost:880/v1}
+      - DIFY_API_KEY=${DIFY_API_KEY:-your-api-key-here}
+      
+      # 服务器配置
+      - PORT=3000
+      - HOST=0.0.0.0
+      - LOG_LEVEL=info
+      
+      # 自定义模型
+      - CUSTOM_MODELS=["dify-chat-model", "dify-completion-model", "dify-assistant"]
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "node", "-e", "const http = require('http'); const options = { hostname: 'localhost', port: 3000, path: '/health', timeout: 2000 }; const req = http.request(options, (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }); req.on('error', () => process.exit(1)); req.end();"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 可选: 如果您想同时运行 open-webui
+  # open-webui:
+  #   image: ghcr.io/open-webui/open-webui:main
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - OPENAI_API_BASE_URLS=http://dify-openai-adapter:3000/v1
+  #     - OPENAI_API_KEYS=your-api-key
+  #   depends_on:
+  #     - dify-openai-adapter
+  #   restart: unless-stopped

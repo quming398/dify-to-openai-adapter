@@ -1,0 +1,50 @@
+{
+  "name": "dify-to-openai-adapter",
+  "version": "1.0.0",
+  "description": "Dify API to OpenAI API adapter for open-webui",
+  "main": "src/index.js",  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "docker:build": "docker build -t dify-openai-adapter .",
+    "docker:run": "docker run -p 3000:3000 dify-openai-adapter",
+    "docker:compose": "docker-compose up -d",
+    "setup": "node setup-wizard.js",
+    "check": "node tests/check-environment.js",
+    "dashboard": "node tests/dashboard.js",
+    "maintenance": "node tests/maintenance.js",
+    "maintenance:health": "node tests/maintenance.js health",
+    "maintenance:clean": "node tests/maintenance.js clean",
+    "maintenance:update": "node tests/maintenance.js update",
+    "test:unit": "node tests/unit/test-class-only.js && node tests/unit/test-logic-only.js",
+    "test:integration": "node tests/integration/test-complete-features.js",
+    "test:api": "node tests/api/test-dify-api-diagnosis.js && node tests/api/test-dify-upload.js",
+    "test:multimodal": "node tests/multimodal/test-multimodal.js",
+    "test:session": "node tests/session/test-conversation-manager.js && node tests/session/test-openai-session.js",
+    "test:util": "node tests/util/simple-test.js",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:api && npm run test:multimodal && npm run test:session && npm run test:util"
+  },
+  "keywords": [
+    "dify",
+    "openai",
+    "api",
+    "adapter",
+    "open-webui"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "form-data": "^4.0.4",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

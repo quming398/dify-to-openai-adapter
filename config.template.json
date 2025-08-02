@@ -1,0 +1,33 @@
+{
+  "model_mappings": {
+    "example-chatbot": {
+      "dify_api_key": "app-YOUR_CHATBOT_API_KEY",
+      "dify_base_url": "http://your-dify-server:port",
+      "app_name": "智能聊天助手",
+      "description": "标准聊天应用，支持阻塞和流式模式",
+      "app_type": "chatbot",
+      "supports_streaming": true,
+      "supports_blocking": true,
+      "default_mode": "blocking"
+    },
+    "example-agent": {
+      "dify_api_key": "app-YOUR_AGENT_API_KEY",
+      "dify_base_url": "http://your-dify-server:port",
+      "app_name": "智能代理助手",
+      "description": "Agent 应用，仅支持流式模式",
+      "app_type": "agent",
+      "supports_streaming": true,
+      "supports_blocking": false,
+      "default_mode": "streaming"
+    }
+  },
+  "settings": {
+    "port": 3000,
+    "host": "0.0.0.0",
+    "default_model": "example-chatbot",
+    "enable_streaming": true,
+    "max_concurrent_requests": 10,
+    "request_timeout": 30000,
+    "retry_attempts": 3
+  }
+}
