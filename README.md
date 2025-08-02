@@ -81,17 +81,6 @@ docker run -d -p 3000:3000 -v $(pwd)/config.json:/app/config.json chengmq/dify-t
 
 服务将在 `http://localhost:3000` 启动。
 
-## 🔒 安全注意事项
-
-**重要**: 本项目已修复了敏感信息泄露问题，请遵循以下安全最佳实践：
-
-- ✅ 真实的 `config.json` 已被 `.gitignore` 忽略
-- ✅ 使用 `config.template.json` 作为配置模板
-- ✅ 生产环境请使用环境变量存储敏感信息
-- ✅ 定期轮换 API 密钥
-
-详细安全指南请参阅 [SECURITY.md](SECURITY.md)。
-
 ## API 使用
 
 ### Chat Completions API
